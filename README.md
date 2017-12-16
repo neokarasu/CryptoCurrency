@@ -1,4 +1,4 @@
-# cryptocurrency
+# CryptoCurrency
 Simplistic page to keep track of cryptocurrency value and profits (based on coinmarketcap)
 
 Input.php can be used to add:
@@ -20,3 +20,7 @@ For now it only has:
 - Bitcoin
 - Ethereum
 - Litecoin
+
+Plan to add:
+- More coins
+- Alternative to coinmarketcap
