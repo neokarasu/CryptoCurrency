@@ -4,11 +4,14 @@
 // Quick and dirty cause no database or any wallet access.
 // Use a dot for decimal points, not a comma
 
-// The amount of a currency you own, specified in that currency
+// The amount of BTC and ETH you own, specified in that currency
 
 $btc_amount = "";
 $eth_amount = "";
-$ltc_amount = "";
+
+// The public key of your wallet of LTC. LTC only for now.
+
+$ltc_publickey = "";
 
 // The exchange rate at the time of purchase, in dollars
 
@@ -16,7 +19,7 @@ $btc_buyinrate = "";
 $eth_buyinrate = "";
 $ltc_buyinrate = "";
 
-// The total amount you aid to get the amount of that currency, in dollars
+// The total amount you paid to get the amount of that currency, in dollars
 
 $btc_totalbuyin = "";
 $eth_totalbuyin = "";

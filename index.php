@@ -7,18 +7,13 @@
 
 <?php
 
-// This is a single api call per page load that brings up the data for the top 10
+// This is a single api call per page load that brings up the data for the top 10 coins from coinmarketcap
+    
 $url = "https://api.coinmarketcap.com/v1/ticker/?limit=10";
 $json = file_get_contents($url);
 $data = json_decode($json, TRUE);
 
-// This is a single api call per page load that brings up latest exchange data between EUR and USD, using EUR as base.
-$url = "https://api.fixer.io/latest?symbols=USD";
-$json = file_get_contents($url);
-$exchangedata = json_decode($json, TRUE);
-$exchange = $exchangedata["rates"]["USD"];
-
-// Assign names to the variables you want to show from the array, where btc = 0, ethereum = 1, litecoin = 4
+// Assign names to the variables you want to show from the coinmarketcap array, where btc = 0, ethereum = 1, litecoin = 4
 
 $btc_rate = $data[0]["price_usd"];
 $btc_percent_change_1h = $data[0]["percent_change_1h"];
@@ -34,20 +29,35 @@ $ltc_rate = $data[4]["price_usd"];
 $ltc_percent_change_1h = $data[4]["percent_change_1h"];
 $ltc_percent_change_24h = $data[4]["percent_change_24h"];
 $ltc_percent_change_7d = $data[4]["percent_change_7d"];
-
+    
+ 
+// This is a single api call per page load that brings up latest exchange data between EUR and USD, using EUR as base
+    
+$url = "https://api.fixer.io/latest?symbols=USD";
+$json = file_get_contents($url);
+$exchangedata_EUR_USD = json_decode($json, TRUE);
+$exchange_EUR_USD = $exchangedata_EUR_USD["rates"]["USD"];
+    
 // Assign static variables for calculations. Quick and dirty cause no database or any wallet access. ALL IN DOLLARS. All from the file input.php
     
 include 'input.php';
     
+// Fetch the current LTC balance from the LTC public key entered. Uses the chainz.cryptoid.info api. 1 API call currently per pageload.
+
+$url = "https://chainz.cryptoid.info/ltc/api.dws?q=getbalance&a=$ltc_publickey";
+$json = file_get_contents($url);
+$ltc_amount = json_decode($json, TRUE);
+
+
 // Perform calculations here instead of in the divs, specific for exit_amonunts
 
 $btc_exitamount = $btc_amount - $btc_transferfee;
 $eth_exitamount = $eth_amount - $eth_transferfee;
 $ltc_exitamount = $ltc_amount - $ltc_transferfee;
 
-$btc_exitcost = (0.0025 * ($btc_exitamount * $btc_rate)) + (0.9 * $exchange );
-$eth_exitcost = (0.0025 * ($eth_exitamount * $eth_rate)) + (0.9 * $exchange );
-$ltc_exitcost = (0.0025 * ($ltc_exitamount * $ltc_rate)) + (0.9 * $exchange );
+$btc_exitcost = (0.0025 * ($btc_exitamount * $btc_rate)) + (0.9 * $exchange_EUR_USD );
+$eth_exitcost = (0.0025 * ($eth_exitamount * $eth_rate)) + (0.9 * $exchange_EUR_USD );
+$ltc_exitcost = (0.0025 * ($ltc_exitamount * $ltc_rate)) + (0.9 * $exchange_EUR_USD );
 
 $btc_totalexit = ($btc_exitamount * $btc_rate) - $btc_exitcost;
 $eth_totalexit = ($eth_exitamount * $eth_rate) - $eth_exitcost;
@@ -76,24 +86,24 @@ $total_percent_exitprofit = ($total_exitprofit / ($btc_totalbuyin + $eth_totalbu
     
 // Perform calculations to convert everything to euro's for the second table
     
-$btc_rate_eu = $btc_rate / $exchange;
-$eth_rate_eu = $eth_rate / $exchange;
-$ltc_rate_eu = $ltc_rate / $exchange;
+$btc_rate_eu = $btc_rate / $exchange_EUR_USD;
+$eth_rate_eu = $eth_rate / $exchange_EUR_USD;
+$ltc_rate_eu = $ltc_rate / $exchange_EUR_USD;
     
-$btc_buyinrate_eu = $btc_buyinrate / $exchange;
-$eth_buyinrate_eu = $eth_buyinrate / $exchange;
-$ltc_buyinrate_eu = $ltc_buyinrate / $exchange;
+$btc_buyinrate_eu = $btc_buyinrate / $exchange_EUR_USD;
+$eth_buyinrate_eu = $eth_buyinrate / $exchange_EUR_USD;
+$ltc_buyinrate_eu = $ltc_buyinrate / $exchange_EUR_USD;
     
-$btc_profit_eu = $btc_profit / $exchange;
-$eth_profit_eu = $eth_profit / $exchange;
-$ltc_profit_eu = $ltc_profit / $exchange;
+$btc_profit_eu = $btc_profit / $exchange_EUR_USD;
+$eth_profit_eu = $eth_profit / $exchange_EUR_USD;
+$ltc_profit_eu = $ltc_profit / $exchange_EUR_USD;
     
-$btc_exitprofit_eu = $btc_exitprofit / $exchange;
-$eth_exitprofit_eu = $eth_exitprofit / $exchange;
-$ltc_exitprofit_eu = $ltc_exitprofit / $exchange;
+$btc_exitprofit_eu = $btc_exitprofit / $exchange_EUR_USD;
+$eth_exitprofit_eu = $eth_exitprofit / $exchange_EUR_USD;
+$ltc_exitprofit_eu = $ltc_exitprofit / $exchange_EUR_USD;
 
-$total_profit_eu = $total_profit / $exchange;
-$total_exitprofit_eu = $total_exitprofit / $exchange;
+$total_profit_eu = $total_profit / $exchange_EUR_USD;
+$total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
 
 ?>
 
@@ -405,7 +415,7 @@ $total_exitprofit_eu = $total_exitprofit / $exchange;
       €&nbsp;<?=round($eth_rate_eu, 3)?>
       </div>
       <div class="cell" data-title="buyin_rate">
-        <?=round($eth_buyinrate_eu, 2)?>
+      €&nbsp;<?=round($eth_buyinrate_eu, 2)?>
       </div>
       <div class="cell" data-title="percent_change_1h">
         <?=$eth_percent_change_1h?>%
