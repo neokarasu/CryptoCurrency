@@ -31,4 +31,29 @@ $btc_transferfee = "";
 $eth_transferfee = "";
 $ltc_transferfee  = "";
 
+
+// The target buyin for coins you're watching
+
+$burst_buyintarget = "";
+$cardano_buyintarget = "";
+$eos_buyintarget = "";
+$iota_buyintarget = "";
+$neo_buyintarget = "";
+$ripple_buyintarget = "";
+$verge_buyintarget = "";
+$waves_buyintarget = "";
+$zcash_buyintarget = "";
+
+// The fee for a transfer in the currency specified, for coins you're watching
+
+$burst_transferfee  = "";
+$cardano_transferfee  = "";
+$eos_transferfee  = "";
+$iota_transferfee = "";
+$neo_transferfee = "";
+$ripple_transferfee  = "";
+$verge_transferfee  = "";
+$waves_transferfee  = "";
+$zcash_transferfee  = "";
+
 ?>
