@@ -209,25 +209,25 @@ $verge_totalexit = ($verge_exitamount * $verge_rate) - $verge_exitcost;
 $waves_totalexit = ($waves_exitamount * $waves_rate) - $waves_exitcost;
 $zcash_totalexit = ($zcash_exitamount * $zcash_rate) - $zcash_exitcost;
 
-$burst_exitprofit = $burst_totalexit - 100 ;
-$cardano_exitprofit = $cardano_totalexit - 100 ;
-$eos_exitprofit = $eos_totalexit - 100 ;
-$iota_exitprofit = $iota_totalexit - 100 ;
-$neo_exitprofit = $neo_totalexit - 100 ;
-$ripple_exitprofit = $ripple_totalexit - 100 ;
-$verge_exitprofit = $verge_totalexit - 100 ;
-$waves_exitprofit = $waves_totalexit - 100 ;
-$zcash_exitprofit = $zcash_totalexit - 100 ;
+$burst_exitprofit = $burst_totalexit - (100 * $exchange_EUR_USD );
+$cardano_exitprofit = $cardano_totalexit - (100 * $exchange_EUR_USD );
+$eos_exitprofit = $eos_totalexit - (100 * $exchange_EUR_USD );
+$iota_exitprofit = $iota_totalexit - (100 * $exchange_EUR_USD );
+$neo_exitprofit = $neo_totalexit - (100 * $exchange_EUR_USD );
+$ripple_exitprofit = $ripple_totalexit - (100 * $exchange_EUR_USD );
+$verge_exitprofit = $verge_totalexit - (100 * $exchange_EUR_USD );
+$waves_exitprofit = $waves_totalexit - (100 * $exchange_EUR_USD );
+$zcash_exitprofit = $zcash_totalexit - (100 * $exchange_EUR_USD );
 
-$burst_percent_exitprofit = ($burst_exitprofit / 100 ) * 100;
-$cardano_percent_exitprofit = ($cardano_exitprofit / 100 ) * 100;
-$eos_percent_exitprofit = ($eos_exitprofit / 100 ) * 100;
-$iota_percent_exitprofit = ($iota_exitprofit / 100 ) * 100;
-$neo_percent_exitprofit = ($neo_exitprofit / 100 ) * 100;
-$ripple_percent_exitprofit = ($ripple_exitprofit / 100 ) * 100;
-$verge_percent_exitprofit = ($verge_exitprofit / 100 ) * 100;
-$waves_percent_exitprofit = ($waves_exitprofit / 100 ) * 100;
-$zcash_percent_exitprofit = ($zcash_exitprofit / 100 ) * 100;
+$burst_percent_exitprofit = ($burst_exitprofit / (100 * $exchange_EUR_USD ) ) * 100;
+$cardano_percent_exitprofit = ($cardano_exitprofit / (100 * $exchange_EUR_USD ) ) * 100;
+$eos_percent_exitprofit = ($eos_exitprofit / (100 * $exchange_EUR_USD ) ) * 100;
+$iota_percent_exitprofit = ($iota_exitprofit / (100 * $exchange_EUR_USD ) ) * 100;
+$neo_percent_exitprofit = ($neo_exitprofit / (100 * $exchange_EUR_USD ) ) * 100;
+$ripple_percent_exitprofit = ($ripple_exitprofit / (100 * $exchange_EUR_USD ) ) * 100;
+$verge_percent_exitprofit = ($verge_exitprofit / (100 * $exchange_EUR_USD ) ) * 100;
+$waves_percent_exitprofit = ($waves_exitprofit / (100 * $exchange_EUR_USD ) ) * 100;
+$zcash_percent_exitprofit = ($zcash_exitprofit / (100 * $exchange_EUR_USD ) ) * 100;
 
 // Perform calculations to convert everything to euro's for the second table of owned coins
     
