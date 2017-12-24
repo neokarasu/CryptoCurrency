@@ -7,19 +7,21 @@ body {
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
   background: #2b2b2b;
+  max-width: 80%;
 }
 
+/* Styling and all that for the primary cyrptocurrency comparison tables themselves */
+
 .wrapper {
-  margin: 0 auto;
-  padding: 30px;
-  max-width: 1000px;
+  margin: 0;
+  max-width: 100%;
 }
 
 .table {
-  margin: 0 0 20px 0;
-  width: 50%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  max-width: 50%;
   display: table;
+  border: 1px solid #ccc;
 }
 
 .row {
@@ -48,4 +50,40 @@ body {
 .cell {
   padding: 6px 12px;
   display: table-cell;
+}
+
+/* Styling and all that for the tabs and tabcontent themselves */
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #27ae60;
+    background-color: #27ae60;
+    display: flex;
+    justify-content: center;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    background-color: #5ad790;
+}
+
+.tab button.active {
+    background-color: #7bd7a3;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
 }

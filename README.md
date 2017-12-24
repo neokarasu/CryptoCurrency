@@ -20,7 +20,9 @@ For now it only has:
 - Bitcoin
 - Ethereum
 - Litecoin
+- A tab to keep track of potential coins with simulated profit
 
-Plan to add:
-- More coins
-- Alternative to coinmarketcap
+Plan to change:
+- Add ATH (all time high and 2/3 of ATH as info if any site supplies this through an API)
+- Add more coins
+- Add alternatives to coinmarketcap
