@@ -19,7 +19,7 @@
 
 // This is a single api call per page load that brings up the data for the top 10 coins from coinmarketcap
 
-$url = "https://api.coinmarketcap.com/v1/ticker/?limit=150";
+$url = "https://api.coinmarketcap.com/v1/ticker/?limit=1000";
 $json = file_get_contents($url);
 $data = json_decode($json, TRUE);
 
