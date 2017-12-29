@@ -1,5 +1,29 @@
 # CryptoCurrency
-Simplistic page to keep track of cryptocurrency value and profits (based on coinmarketcap)
+Page to keep track of value & profits of portfolio of cryptocurrency (based on coinmarketcap)
+
+Features:
+- Login screen, no database required
+- A tab to keep track of your portfolio
+- A tab to keep track of potential coins with simulated profit
+- Easy to add interesting coins if necessary
+
+Coins added for portfolio:
+- Bitcoin
+- Ethereum
+- Litecoin
+
+Coins added for watchlist:
+- Burst
+- Cardano
+- Eos
+- Iota
+- Neo
+- Ripple
+- Verge
+- Waves
+- Zcash
+
+How to use:
 
 Input.php can be used to add:
 - Amount of coins owned per coin
@@ -13,14 +37,9 @@ Coins.php shows basic information on:
 - Profit (absolute and percentage)
 - Profit deducting regular fees (absolute and percentage)
 
-Coins.php uses exchange rates for EUR/USD from fixer.io which are updated at 4pm CET every working day
-Coins.php uses cryptocurrency exchange rates and percentage changes from Coinmarketcap that are updated every 5 minutes
-
-For now it only has:
-- Bitcoin
-- Ethereum
-- Litecoin
-- A tab to keep track of potential coins with simulated profit
+Dependencies:
+- Coins.php uses exchange rates for EUR/USD from fixer.io which are updated at 4pm CET every working day
+- Coins.php uses cryptocurrency exchange rates and percentage changes from Coinmarketcap that are updated every 5 minutes
 
 Plan to change:
 - Add ATH (all time high and 2/3 of ATH as info if any site supplies this through an API)

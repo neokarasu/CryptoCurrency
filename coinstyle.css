@@ -36,7 +36,6 @@ body {
 .row.header {
   font-weight: 900;
   color: #ffffff;
-  background: #ea6153;
 }
 
 .row.green {
@@ -86,4 +85,28 @@ body {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
+}
+
+/* Styling for the login page and logout box */
+
+.login {
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.login.green {
+  background: #27ae60;
+}
+
+.logout.table {
+  margin: 20px;
+  display: table;
+  border: 1px solid #ccc;
+  text-align: center;
+  margin-left: auto;
+  margin-right:auto;
+}
+
+.logout.table a:link, .logout.table a:visited, .logout.table a:hover, .logout.table a:active  {
+  color: #ffffff;
 }
