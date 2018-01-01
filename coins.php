@@ -33,11 +33,11 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 $url = "https://api.coinmarketcap.com/v1/ticker/?limit=1000";
 $json = file_get_contents($url);
-$data = json_decode($json, TRUE);
+$coinmarketcap_data = json_decode($json, TRUE);
 
 // Make an easy usable array containing only the coin names and id (index key) for further use
 
-$list_coin_names = array_column($data, 'name');
+$list_coin_names = array_column($coinmarketcap_data, 'name');
 
 // Get proper id (index key) for interesting coins from the array to use when assigning variables to info from the array
 
@@ -56,79 +56,79 @@ $burst_id = array_search('Burst', $list_coin_names);
 
 // Create variables for the data to be shown in the tables for owned coins
 
-$btc_rate = $data[$bitcoin_id]["price_usd"];
-$btc_percent_change_1h = $data[$bitcoin_id]["percent_change_1h"];
-$btc_percent_change_24h = $data[$bitcoin_id]["percent_change_24h"];
-$btc_percent_change_7d = $data[$bitcoin_id]["percent_change_7d"];
-$btc_symbol = $data[$bitcoin_id]["symbol"];
+$btc_rate = $coinmarketcap_data[$bitcoin_id]["price_usd"];
+$btc_percent_change_1h = $coinmarketcap_data[$bitcoin_id]["percent_change_1h"];
+$btc_percent_change_24h = $coinmarketcap_data[$bitcoin_id]["percent_change_24h"];
+$btc_percent_change_7d = $coinmarketcap_data[$bitcoin_id]["percent_change_7d"];
+$btc_symbol = $coinmarketcap_data[$bitcoin_id]["symbol"];
 
-$eth_rate = $data[$ethereum_id]["price_usd"];
-$eth_percent_change_1h = $data[$ethereum_id]["percent_change_1h"];
-$eth_percent_change_24h = $data[$ethereum_id]["percent_change_24h"];
-$eth_percent_change_7d = $data[$ethereum_id]["percent_change_7d"];
-$eth_symbol = $data[$ethereum_id]["symbol"];
+$eth_rate = $coinmarketcap_data[$ethereum_id]["price_usd"];
+$eth_percent_change_1h = $coinmarketcap_data[$ethereum_id]["percent_change_1h"];
+$eth_percent_change_24h = $coinmarketcap_data[$ethereum_id]["percent_change_24h"];
+$eth_percent_change_7d = $coinmarketcap_data[$ethereum_id]["percent_change_7d"];
+$eth_symbol = $coinmarketcap_data[$ethereum_id]["symbol"];
 
-$ltc_rate = $data[$litecoin_id]["price_usd"];
-$ltc_percent_change_1h = $data[$litecoin_id]["percent_change_1h"];
-$ltc_percent_change_24h = $data[$litecoin_id]["percent_change_24h"];
-$ltc_percent_change_7d = $data[$litecoin_id]["percent_change_7d"];
-$ltc_symbol = $data[$litecoin_id]["symbol"];
+$ltc_rate = $coinmarketcap_data[$litecoin_id]["price_usd"];
+$ltc_percent_change_1h = $coinmarketcap_data[$litecoin_id]["percent_change_1h"];
+$ltc_percent_change_24h = $coinmarketcap_data[$litecoin_id]["percent_change_24h"];
+$ltc_percent_change_7d = $coinmarketcap_data[$litecoin_id]["percent_change_7d"];
+$ltc_symbol = $coinmarketcap_data[$litecoin_id]["symbol"];
 
 // Create variables for the data to be shown in the tables for not owned coins (watchlist)
 
-$ripple_rate = $data[$ripple_id]["price_usd"];
-$ripple_percent_change_1h = $data[$ripple_id]["percent_change_1h"];
-$ripple_percent_change_24h = $data[$ripple_id]["percent_change_24h"];
-$ripple_percent_change_7d = $data[$ripple_id]["percent_change_7d"];
-$ripple_symbol = $data[$ripple_id]["symbol"];
+$ripple_rate = $coinmarketcap_data[$ripple_id]["price_usd"];
+$ripple_percent_change_1h = $coinmarketcap_data[$ripple_id]["percent_change_1h"];
+$ripple_percent_change_24h = $coinmarketcap_data[$ripple_id]["percent_change_24h"];
+$ripple_percent_change_7d = $coinmarketcap_data[$ripple_id]["percent_change_7d"];
+$ripple_symbol = $coinmarketcap_data[$ripple_id]["symbol"];
 
-$cardano_rate = $data[$cardano_id]["price_usd"];
-$cardano_percent_change_1h = $data[$cardano_id]["percent_change_1h"];
-$cardano_percent_change_24h = $data[$cardano_id]["percent_change_24h"];
-$cardano_percent_change_7d = $data[$cardano_id]["percent_change_7d"];
-$cardano_symbol = $data[$cardano_id]["symbol"];
+$cardano_rate = $coinmarketcap_data[$cardano_id]["price_usd"];
+$cardano_percent_change_1h = $coinmarketcap_data[$cardano_id]["percent_change_1h"];
+$cardano_percent_change_24h = $coinmarketcap_data[$cardano_id]["percent_change_24h"];
+$cardano_percent_change_7d = $coinmarketcap_data[$cardano_id]["percent_change_7d"];
+$cardano_symbol = $coinmarketcap_data[$cardano_id]["symbol"];
 
-$iota_rate = $data[$iota_id]["price_usd"];
-$iota_percent_change_1h = $data[$iota_id]["percent_change_1h"];
-$iota_percent_change_24h = $data[$iota_id]["percent_change_24h"];
-$iota_percent_change_7d = $data[$iota_id]["percent_change_7d"];
-$iota_symbol = $data[$iota_id]["symbol"];
+$iota_rate = $coinmarketcap_data[$iota_id]["price_usd"];
+$iota_percent_change_1h = $coinmarketcap_data[$iota_id]["percent_change_1h"];
+$iota_percent_change_24h = $coinmarketcap_data[$iota_id]["percent_change_24h"];
+$iota_percent_change_7d = $coinmarketcap_data[$iota_id]["percent_change_7d"];
+$iota_symbol = $coinmarketcap_data[$iota_id]["symbol"];
 
-$eos_rate = $data[$eos_id]["price_usd"];
-$eos_percent_change_1h = $data[$eos_id]["percent_change_1h"];
-$eos_percent_change_24h = $data[$eos_id]["percent_change_24h"];
-$eos_percent_change_7d = $data[$eos_id]["percent_change_7d"];
-$eos_symbol = $data[$eos_id]["symbol"];
+$eos_rate = $coinmarketcap_data[$eos_id]["price_usd"];
+$eos_percent_change_1h = $coinmarketcap_data[$eos_id]["percent_change_1h"];
+$eos_percent_change_24h = $coinmarketcap_data[$eos_id]["percent_change_24h"];
+$eos_percent_change_7d = $coinmarketcap_data[$eos_id]["percent_change_7d"];
+$eos_symbol = $coinmarketcap_data[$eos_id]["symbol"];
 
-$neo_rate = $data[$neo_id]["price_usd"];
-$neo_percent_change_1h = $data[$neo_id]["percent_change_1h"];
-$neo_percent_change_24h = $data[$neo_id]["percent_change_24h"];
-$neo_percent_change_7d = $data[$neo_id]["percent_change_7d"];
-$neo_symbol = $data[$neo_id]["symbol"];
+$neo_rate = $coinmarketcap_data[$neo_id]["price_usd"];
+$neo_percent_change_1h = $coinmarketcap_data[$neo_id]["percent_change_1h"];
+$neo_percent_change_24h = $coinmarketcap_data[$neo_id]["percent_change_24h"];
+$neo_percent_change_7d = $coinmarketcap_data[$neo_id]["percent_change_7d"];
+$neo_symbol = $coinmarketcap_data[$neo_id]["symbol"];
 
-$verge_rate = $data[$verge_id]["price_usd"];
-$verge_percent_change_1h = $data[$verge_id]["percent_change_1h"];
-$verge_percent_change_24h = $data[$verge_id]["percent_change_24h"];
-$verge_percent_change_7d = $data[$verge_id]["percent_change_7d"];
-$verge_symbol = $data[$verge_id]["symbol"];
+$verge_rate = $coinmarketcap_data[$verge_id]["price_usd"];
+$verge_percent_change_1h = $coinmarketcap_data[$verge_id]["percent_change_1h"];
+$verge_percent_change_24h = $coinmarketcap_data[$verge_id]["percent_change_24h"];
+$verge_percent_change_7d = $coinmarketcap_data[$verge_id]["percent_change_7d"];
+$verge_symbol = $coinmarketcap_data[$verge_id]["symbol"];
 
-$zcash_rate = $data[$zcash_id]["price_usd"];
-$zcash_percent_change_1h = $data[$zcash_id]["percent_change_1h"];
-$zcash_percent_change_24h = $data[$zcash_id]["percent_change_24h"];
-$zcash_percent_change_7d = $data[$zcash_id]["percent_change_7d"];
-$zcash_symbol = $data[$zcash_id]["symbol"];
+$zcash_rate = $coinmarketcap_data[$zcash_id]["price_usd"];
+$zcash_percent_change_1h = $coinmarketcap_data[$zcash_id]["percent_change_1h"];
+$zcash_percent_change_24h = $coinmarketcap_data[$zcash_id]["percent_change_24h"];
+$zcash_percent_change_7d = $coinmarketcap_data[$zcash_id]["percent_change_7d"];
+$zcash_symbol = $coinmarketcap_data[$zcash_id]["symbol"];
 
-$waves_rate = $data[$waves_id]["price_usd"];
-$waves_percent_change_1h = $data[$waves_id]["percent_change_1h"];
-$waves_percent_change_24h = $data[$waves_id]["percent_change_24h"];
-$waves_percent_change_7d = $data[$waves_id]["percent_change_7d"];
-$waves_symbol = $data[$waves_id]["symbol"];
+$waves_rate = $coinmarketcap_data[$waves_id]["price_usd"];
+$waves_percent_change_1h = $coinmarketcap_data[$waves_id]["percent_change_1h"];
+$waves_percent_change_24h = $coinmarketcap_data[$waves_id]["percent_change_24h"];
+$waves_percent_change_7d = $coinmarketcap_data[$waves_id]["percent_change_7d"];
+$waves_symbol = $coinmarketcap_data[$waves_id]["symbol"];
 
-$burst_rate = $data[$burst_id]["price_usd"];
-$burst_percent_change_1h = $data[$burst_id]["percent_change_1h"];
-$burst_percent_change_24h = $data[$burst_id]["percent_change_24h"];
-$burst_percent_change_7d = $data[$burst_id]["percent_change_7d"];
-$burst_symbol = $data[$burst_id]["symbol"];
+$burst_rate = $coinmarketcap_data[$burst_id]["price_usd"];
+$burst_percent_change_1h = $coinmarketcap_data[$burst_id]["percent_change_1h"];
+$burst_percent_change_24h = $coinmarketcap_data[$burst_id]["percent_change_24h"];
+$burst_percent_change_7d = $coinmarketcap_data[$burst_id]["percent_change_7d"];
+$burst_symbol = $coinmarketcap_data[$burst_id]["symbol"];
 
 // This is a single api call per page load that brings up latest exchange data between EUR and USD, using EUR as base
 
@@ -141,7 +141,21 @@ $exchange_EUR_USD = $exchangedata_EUR_USD["rates"]["USD"];
 
 include 'input.php';
 
-// Fetch the current LTC balance from the LTC public key entered. Uses the chainz.cryptoid.info api. 1 API call currently per pageload.
+// Fetch the current BTC balance from the BTC public key entered. Uses etherscan.io api. 1 API call per pageload
+
+$url = "https://blockchain.info/nl/balance?active=$btc_publickey";
+$json = file_get_contents($url);
+$btc_amount_data = json_decode($json, TRUE);
+$btc_amount = ($btc_amount_data["$btc_publickey"]["final_balance"]) / 100000000 ;
+
+// Fetch the current ETH balance from the ETH public key entered. Uses etherscan.io api. 1 API call per pageload
+
+$url = "https://api.etherscan.io/api?module=account&action=balance&address=$eth_publickey&tag=latest";
+$json = file_get_contents($url);
+$eth_amount_data = json_decode($json, TRUE);
+$eth_amount = ($eth_amount_data["result"]) / 1000000000000000000 ;
+
+// Fetch the current LTC balance from the LTC public key entered. Uses the chainz.cryptoid.info api. 1 API call per pageload
 
 $url = "https://chainz.cryptoid.info/ltc/api.dws?q=getbalance&a=$ltc_publickey";
 $json = file_get_contents($url);

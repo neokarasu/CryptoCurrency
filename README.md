@@ -1,5 +1,5 @@
 # CryptoCurrency
-Page to keep track of value & profits of portfolio of cryptocurrency (based on coinmarketcap)
+Page to keep track of value & profits of a portfolio of cryptocurrency (based on coinmarketcap)
 
 Features:
 - Login screen, no database required
@@ -26,7 +26,7 @@ Coins added for watchlist:
 How to use:
 
 Input.php can be used to add:
-- Amount of coins owned per coin
+- Public key of owned coins, 1 per coin only. Limited to BTC, ETH and LTC
 - Buyin rate: value of 1 of each coin at moment of buying, in dollars
 - Buyin costs: Amount of money spent on purchase per coin, in dollars
 - Transferfee: The usual transfer fee in the respective coin, not dollars
@@ -42,6 +42,8 @@ Dependencies:
 - Coins.php uses cryptocurrency exchange rates and percentage changes from Coinmarketcap that are updated every 5 minutes
 
 Plan to change:
+- Seperate code into more sensible files for future additions
+- Add actual exchanges as alternatives to coinmarketcap summary
+- Add actual fees (if any site supplies this through an API)
 - Add ATH (all time high and 2/3 of ATH as info if any site supplies this through an API)
 - Add more coins
-- Add alternatives to coinmarketcap

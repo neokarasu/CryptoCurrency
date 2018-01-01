@@ -1,16 +1,13 @@
 <?php
 
-// This file is for assigning static variables for calculations. 
-// Quick and dirty cause no database or any wallet access.
+// This file is for assigning static variables for calculations and public keys 
+// Quick and dirty cause no database
 // Use a dot for decimal points, not a comma
 
-// The amount of BTC and ETH you own, specified in that currency
+// The public key of your wallets of LTC, ETH and BTC. 1 per currency
 
-$btc_amount = "";
-$eth_amount = "";
-
-// The public key of your wallet of LTC. LTC only for now.
-
+$btc_publickey = "";
+$eth_publickey = "";
 $ltc_publickey = "";
 
 // The exchange rate at the time of purchase, in dollars
