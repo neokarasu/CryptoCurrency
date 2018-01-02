@@ -42,7 +42,7 @@ Dependencies:
 - Coins.php uses cryptocurrency exchange rates and percentage changes from Coinmarketcap that are updated every 5 minutes
 
 Plan to change:
-- Seperate code into more sensible files for future additions
+- Fix the logic in currently split files to make future additions easier
 - Add actual exchanges as alternatives to coinmarketcap summary
 - Add actual fees (if any site supplies this through an API)
 - Add ATH (all time high and 2/3 of ATH as info if any site supplies this through an API)

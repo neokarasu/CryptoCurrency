@@ -28,7 +28,6 @@ if(isset($_POST['Submit'])){
 
 ?>
 
-
 <html>
 <head>
 <title>Login Page</title>

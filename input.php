@@ -22,12 +22,11 @@ $btc_totalbuyin = "";
 $eth_totalbuyin = "";
 $ltc_totalbuyin = "";
 
-// The fee for a transfer in the currency specified, specifically for moving from a paper wallet to an exchange
+// The transfer fee for a currency in the currency specified
 
 $btc_transferfee = "";
 $eth_transferfee = "";
 $ltc_transferfee  = "";
-
 
 // The target buyin for coins you're watching
 
@@ -41,7 +40,7 @@ $verge_buyintarget = "";
 $waves_buyintarget = "";
 $zcash_buyintarget = "";
 
-// The fee for a transfer in the currency specified, for coins you're watching
+// The transfer fee for a transfer in the currency specified, for coins you're watching
 
 $burst_transferfee  = "";
 $cardano_transferfee  = "";
