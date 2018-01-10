@@ -56,6 +56,105 @@ require 'watchlist.php';
 <!-- Content of the Summary tab goes here -->
 
 
+
+<div class="wrapper">
+
+<div class="table">
+  <div class="row header blue" style="display:table-row">
+    <div class="cell">Summary (in dollars)</div>
+  </div>
+</div>
+<div class="table">
+<div class="row header green">
+      <div class="cell">
+        Type
+      </div>
+      <div class="cell">
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell">
+        Profit
+      </div>
+      <div class="cell">
+        Profit&nbsp;%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="WalletType">
+        Paper Wallet
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($paper_total_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+      <?=round($paper_total_percent_profit, 2)?>%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="WalletType">
+        Bitfinex
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bfn_total_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+      <?=round($bfn_total_percent_profit, 2)?>%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="WalletType">
+        Binance
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bin_total_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+      <?=round($bin_total_percent_profit, 2)?>%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="Symbol">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="Rate">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="buyin_rate">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="empty">
+        Total:
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($summary_total_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+      <?=round($summary_percent_profit, 2)?>%
+      </div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 <!-- End of content of the Summary tab -->
 
 
@@ -887,7 +986,7 @@ require 'watchlist.php';
       $&nbsp;<?=round($bin_total_profit, 2)?>
       </div>
       <div class="cell" data-title="profit %">
-        <?=round($bin_total_percent_profit, 2)?>%
+      <?=round($bin_total_percent_profit, 2)?>%
       </div>
 </div>
 

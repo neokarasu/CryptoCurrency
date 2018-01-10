@@ -7,6 +7,7 @@ Features:
 - A tab to keep track of your Bitfinex portfolio
 - A tab to keep track of your Binance portfolio
 - A tab to keep track of potential coins with simulated profit
+- A summary tab listing profits per paper wallet/exchange only
 - Easy to add interesting coins if necessary
 
 Coins added for paper wallet, using public keys:
