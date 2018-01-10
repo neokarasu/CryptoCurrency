@@ -55,7 +55,7 @@ require 'watchlist.php';
 
 <!-- Content of the Summary tab goes here -->
 
-
+<div id="Summary" class="tabcontent" align="center">
 
 <div class="wrapper">
 
