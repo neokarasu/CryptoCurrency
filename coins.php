@@ -8,14 +8,6 @@ if(!isset($_SESSION['UserData']['Username'])){
 	exit;
 }
 
-// API calls and calculations for coinmarketcap tabs in coinmarketcap.php
-
-require 'coinmarketcap.php';
-
-// API calls and everything for eur-usd fiat exchange in fiatexchange.php
-
-require 'fiatexchange.php';
-
 // All static variables and everything that needs to be manually input in input.php
 
 require 'input.php';
@@ -24,6 +16,22 @@ require 'input.php';
 
 require 'balance.php';
 
+// API calls and everything for eur-usd fiat exchange in fiatexchange.php
+
+require 'fiatexchange.php';
+
+// API calls and calculations for coinmarketcap tabs in coinmarketcap.php
+
+require 'coinmarketcap.php';
+
+// API calls and calculations for bitfinex tabs in bitfinex.php
+
+require 'bitfinex.php';
+
+// API calls and calculations for binance tabs in binance.php
+
+require 'binance.php';
+
 // All the watchlist information is in watchlist.php 
 
 require 'watchlist.php';
@@ -31,84 +39,29 @@ require 'watchlist.php';
 
 <html>
 <head>
-<title>Testing</title>
+<title>Cryptocurrency</title>
 <link rel="stylesheet" type="text/css" href="coinstyle.css" />
 <script src="tabs.js"></script>
 </head>
 <body>
 
 <div class="tab">
-  <button class="tablinks" onclick="openTabcontent(event, 'Coins')">Coins</button>
+  <button class="tablinks" onclick="openTabcontent(event, 'Summary')">Summary</button>
+  <button class="tablinks" onclick="openTabcontent(event, 'PaperWallet')">Paper Wallet</button>
+  <button class="tablinks" onclick="openTabcontent(event, 'Bitfinex')">Bitfinex</button>
+  <button class="tablinks" onclick="openTabcontent(event, 'Binance')">Binance</button>
   <button class="tablinks" onclick="openTabcontent(event, 'Watchlist')">Watchlist</button>
 </div>
 
-<div id="Coins" class="tabcontent" align="center">
+<!-- Content of the Summary tab goes here -->
 
-<?php
 
-// Perform calculations here instead of in the divs, specific for exit_amounts
-// Start calculations for owned coins
+<!-- End of content of the Summary tab -->
 
-// For future use, plan is to divide calculation of fees between paper wallets and exchange wallets
-// $paper_btc_exitamount = $btc_amount - $btc_transferfee;
-// $paper_eth_exitamount = $eth_amount - $eth_transferfee;
-// $paper_ltc_exitamount = $ltc_amount - $ltc_transferfee;
 
-$btc_exitamount = $btc_amount - $btc_transferfee;
-$eth_exitamount = $eth_amount - $eth_transferfee;
-$ltc_exitamount = $ltc_amount - $ltc_transferfee;
+<!-- Content of the Paper Wallet tab goes here -->
 
-$btc_exitcost = (0.0025 * ($btc_exitamount * $cmc_btc_rate)) + (0.9 * $exchange_EUR_USD );
-$eth_exitcost = (0.0025 * ($eth_exitamount * $cmc_eth_rate)) + (0.9 * $exchange_EUR_USD );
-$ltc_exitcost = (0.0025 * ($ltc_exitamount * $cmc_ltc_rate)) + (0.9 * $exchange_EUR_USD );
-
-$btc_totalexit = ($btc_exitamount * $cmc_btc_rate) - $btc_exitcost;
-$eth_totalexit = ($eth_exitamount * $cmc_eth_rate) - $eth_exitcost;
-$ltc_totalexit = ($ltc_exitamount * $cmc_ltc_rate) - $ltc_exitcost;
-
-$btc_profit = ($cmc_btc_rate - $btc_buyinrate ) * $btc_amount;
-$eth_profit = ($cmc_eth_rate - $eth_buyinrate ) * $eth_amount;
-$ltc_profit = ($cmc_ltc_rate - $ltc_buyinrate ) * $ltc_amount;
-
-$btc_percent_profit = ($btc_profit / $btc_totalbuyin) * 100;
-$eth_percent_profit = ($eth_profit / $eth_totalbuyin) * 100;
-$ltc_percent_profit = ($ltc_profit / $ltc_totalbuyin) * 100;
-
-$btc_exitprofit = $btc_totalexit - $btc_totalbuyin;
-$eth_exitprofit = $eth_totalexit - $eth_totalbuyin;
-$ltc_exitprofit = $ltc_totalexit - $ltc_totalbuyin;
-
-$btc_percent_exitprofit = ($btc_exitprofit / $btc_totalbuyin) * 100;
-$eth_percent_exitprofit = ($eth_exitprofit / $eth_totalbuyin) * 100;
-$ltc_percent_exitprofit = ($ltc_exitprofit / $ltc_totalbuyin) * 100;
-
-$total_profit = $btc_profit + $eth_profit + $ltc_profit;
-$total_percent_profit = ($total_profit / ($btc_totalbuyin + $eth_totalbuyin + $ltc_totalbuyin)) * 100;
-$total_exitprofit = $btc_exitprofit + $eth_exitprofit + $ltc_exitprofit;
-$total_percent_exitprofit = ($total_exitprofit / ($btc_totalbuyin + $eth_totalbuyin + $ltc_totalbuyin)) * 100;
-
-// Perform calculations to convert everything to euro's for the second table of owned coins
-
-$cmc_btc_rate_eu = $cmc_btc_rate / $exchange_EUR_USD;
-$cmc_eth_rate_eu = $cmc_eth_rate / $exchange_EUR_USD;
-$cmc_ltc_rate_eu = $cmc_ltc_rate / $exchange_EUR_USD;
-
-$btc_buyinrate_eu = $btc_buyinrate / $exchange_EUR_USD;
-$eth_buyinrate_eu = $eth_buyinrate / $exchange_EUR_USD;
-$ltc_buyinrate_eu = $ltc_buyinrate / $exchange_EUR_USD;
-
-$btc_profit_eu = $btc_profit / $exchange_EUR_USD;
-$eth_profit_eu = $eth_profit / $exchange_EUR_USD;
-$ltc_profit_eu = $ltc_profit / $exchange_EUR_USD;
-
-$btc_exitprofit_eu = $btc_exitprofit / $exchange_EUR_USD;
-$eth_exitprofit_eu = $eth_exitprofit / $exchange_EUR_USD;
-$ltc_exitprofit_eu = $ltc_exitprofit / $exchange_EUR_USD;
-
-$total_profit_eu = $total_profit / $exchange_EUR_USD;
-$total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
-
-?>
+<div id="PaperWallet" class="tabcontent" align="center">
 
 <!-- First table for USD prices of coinmarketcap -->
 
@@ -128,10 +81,10 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         Symbol
       </div>
       <div class="cell">
-        Value
+        Rate
       </div>
       <div class="cell">
-        Buyin Value
+        Buyin Rate
       </div>
       <div class="cell">
         Change 1&nbsp;hour
@@ -169,11 +122,11 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         <?=$cmc_btc_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       $&nbsp;<?=$cmc_btc_rate?>
       </div>
       <div class="cell" data-title="buyin_rate">
-      $&nbsp;<?=$btc_buyinrate?>
+      $&nbsp;<?=$paper_btc_buyinrate?>
       </div>
       <div class="cell" data-title="percent_change_1h">
         <?=$cmc_btc_percent_change_1h?>%
@@ -188,19 +141,19 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit">
-      $&nbsp;<?=round($btc_profit, 2)?>
+      $&nbsp;<?=round($paper_btc_profit, 2)?>
       </div>
       <div class="cell" data-title="profit %">
-        <?=round($btc_percent_profit, 2)?>%
+        <?=round($paper_btc_percent_profit, 2)?>%
       </div>
       <div class="cell" data-title="empty">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit_minus_fees">
-      $&nbsp;<?=round($btc_exitprofit, 2)?>
+      $&nbsp;<?=round($paper_btc_exitprofit, 2)?>
       </div>
       <div class="cell" data-title="percent_profit_minus_fees">
-        <?=round($btc_percent_exitprofit, 2)?>%
+        <?=round($paper_btc_percent_exitprofit, 2)?>%
       </div>
 </div>
 
@@ -211,11 +164,11 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         <?=$cmc_eth_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       $&nbsp;<?=$cmc_eth_rate?>
       </div>
       <div class="cell" data-title="buyin_rate">
-      $&nbsp;<?=$eth_buyinrate?>
+      $&nbsp;<?=$paper_eth_buyinrate?>
       </div>
       <div class="cell" data-title="percent_change_1h">
         <?=$cmc_eth_percent_change_1h?>%
@@ -230,19 +183,19 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit">
-      $&nbsp;<?=round($eth_profit, 2)?>
+      $&nbsp;<?=round($paper_eth_profit, 2)?>
       </div>
       <div class="cell" data-title="profit %">
-       <?=round($eth_percent_profit, 2)?>%
+       <?=round($paper_eth_percent_profit, 2)?>%
       </div>
       <div class="cell" data-title="empty">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit_minus_fees">
-      $&nbsp;<?=round($eth_exitprofit, 2)?>
+      $&nbsp;<?=round($paper_eth_exitprofit, 2)?>
       </div>
       <div class="cell" data-title="percent_profit_minus_fees">
-        <?=round($eth_percent_exitprofit, 2)?>%
+        <?=round($paper_eth_percent_exitprofit, 2)?>%
       </div>
 
 </div>
@@ -254,11 +207,11 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         <?=$cmc_ltc_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       $&nbsp;<?=$cmc_ltc_rate?>
       </div>
       <div class="cell" data-title="buyin_rate">
-      $&nbsp;<?=$ltc_buyinrate?>
+      $&nbsp;<?=$paper_ltc_buyinrate?>
       </div>
       <div class="cell" data-title="percent_change_1h">
         <?=$cmc_ltc_percent_change_1h?>%
@@ -273,19 +226,19 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit">
-      $&nbsp;<?=round($ltc_profit, 2)?>
+      $&nbsp;<?=round($paper_ltc_profit, 2)?>
       </div>
       <div class="cell" data-title="profit %">
-        <?=round($ltc_percent_profit, 2)?>%
+        <?=round($paper_ltc_percent_profit, 2)?>%
       </div>
       <div class="cell" data-title="empty">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit_minus_fees">
-      $&nbsp;<?=round($ltc_exitprofit, 2 )?>
+      $&nbsp;<?=round($paper_ltc_exitprofit, 2 )?>
       </div>
       <div class="cell" data-title="percent_profit_minus_fees">
-        <?=round($ltc_percent_exitprofit, 2)?>%
+        <?=round($paper_ltc_percent_exitprofit, 2)?>%
       </div>
 </div>
 
@@ -296,7 +249,7 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         &nbsp;
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
         &nbsp;
       </div>
       <div class="cell" data-title="buyin_rate">
@@ -315,19 +268,19 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         Total:
       </div>
       <div class="cell" data-title="profit">
-      $&nbsp;<?=round($total_profit, 2)?>
+      $&nbsp;<?=round($paper_total_profit, 2)?>
       </div>
       <div class="cell" data-title="profit %">
-        <?=round($total_percent_profit, 2)?>%
+        <?=round($paper_total_percent_profit, 2)?>%
       </div>
       <div class="cell" data-title="empty">
         Total:
       </div>
       <div class="cell" data-title="profit_minus_fees">
-      $&nbsp;<?=round($total_exitprofit, 2 )?>
+      $&nbsp;<?=round($paper_total_exitprofit, 2 )?>
       </div>
       <div class="cell" data-title="percent_profit_minus_fees">
-        <?=round($total_percent_exitprofit, 2)?>%
+        <?=round($paper_total_percent_exitprofit, 2)?>%
       </div>
 
 </div>
@@ -354,10 +307,10 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         Symbol
       </div>
       <div class="cell">
-        Value
+        Rate
       </div>
       <div class="cell">
-        Buyin Value
+        Buyin Rate
       </div>
       <div class="cell">
         Change 1&nbsp;hour
@@ -395,11 +348,11 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         <?=$cmc_btc_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       €&nbsp;<?=round($cmc_btc_rate_eu, 3)?>
       </div>
       <div class="cell" data-title="buyin_rate">
-      €&nbsp;<?=round($btc_buyinrate_eu, 2)?>
+      €&nbsp;<?=round($paper_btc_buyinrate_eu, 2)?>
       </div>
       <div class="cell" data-title="percent_change_1h">
         <?=$cmc_btc_percent_change_1h?>%
@@ -414,19 +367,19 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit">
-      €&nbsp;<?=round($btc_profit_eu, 2)?>
+      €&nbsp;<?=round($paper_btc_profit_eu, 2)?>
       </div>
       <div class="cell" data-title="profit %">
-        <?=round($btc_percent_profit, 2)?>%
+        <?=round($paper_btc_percent_profit, 2)?>%
       </div>
       <div class="cell" data-title="empty">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit_minus_fees">
-      €&nbsp;<?=round($btc_exitprofit_eu, 2)?>
+      €&nbsp;<?=round($paper_btc_exitprofit_eu, 2)?>
       </div>
       <div class="cell" data-title="percent_profit_minus_fees">
-        <?=round($btc_percent_exitprofit, 2)?>%
+        <?=round($paper_btc_percent_exitprofit, 2)?>%
       </div>
 
 </div>
@@ -438,11 +391,11 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         <?=$cmc_eth_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       €&nbsp;<?=round($cmc_eth_rate_eu, 3)?>
       </div>
       <div class="cell" data-title="buyin_rate">
-      €&nbsp;<?=round($eth_buyinrate_eu, 2)?>
+      €&nbsp;<?=round($paper_eth_buyinrate_eu, 2)?>
       </div>
       <div class="cell" data-title="percent_change_1h">
         <?=$cmc_eth_percent_change_1h?>%
@@ -457,19 +410,19 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit">
-      €&nbsp;<?=round($eth_profit_eu, 2)?>
+      €&nbsp;<?=round($paper_eth_profit_eu, 2)?>
       </div>
       <div class="cell" data-title="profit %">
-       <?=round($eth_percent_profit, 2)?>%
+       <?=round($paper_eth_percent_profit, 2)?>%
       </div>
       <div class="cell" data-title="empty">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit_minus_fees">
-      €&nbsp;<?=round($eth_exitprofit_eu, 2)?>
+      €&nbsp;<?=round($paper_eth_exitprofit_eu, 2)?>
       </div>
       <div class="cell" data-title="percent_profit_minus_fees">
-        <?=round($eth_percent_exitprofit, 2)?>%
+        <?=round($paper_eth_percent_exitprofit, 2)?>%
       </div>
 
 </div>
@@ -481,11 +434,11 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         <?=$cmc_ltc_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       €&nbsp;<?=round($cmc_ltc_rate_eu, 3)?>
       </div>
       <div class="cell" data-title="buyin_rate">
-      €&nbsp;<?=round($ltc_buyinrate_eu, 2)?>
+      €&nbsp;<?=round($paper_ltc_buyinrate_eu, 2)?>
       </div>
       <div class="cell" data-title="percent_change_1h">
         <?=$cmc_ltc_percent_change_1h?>%
@@ -500,19 +453,19 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit">
-      €&nbsp;<?=round($ltc_profit_eu, 2)?>
+      €&nbsp;<?=round($paper_ltc_profit_eu, 2)?>
       </div>
       <div class="cell" data-title="profit %">
-        <?=round($ltc_percent_profit, 2)?>%
+        <?=round($paper_ltc_percent_profit, 2)?>%
       </div>
       <div class="cell" data-title="empty">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit_minus_fees">
-      €&nbsp;<?=round($ltc_exitprofit_eu, 2 )?>
+      €&nbsp;<?=round($paper_ltc_exitprofit_eu, 2 )?>
       </div>
       <div class="cell" data-title="percent_profit_minus_fees">
-        <?=round($ltc_percent_exitprofit, 2)?>%
+        <?=round($paper_ltc_percent_exitprofit, 2)?>%
       </div>
 
 </div>
@@ -524,7 +477,7 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         &nbsp;
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
         &nbsp;
       </div>
       <div class="cell" data-title="buyin_rate">
@@ -543,19 +496,19 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         Total:
       </div>
       <div class="cell" data-title="profit">
-      €&nbsp;<?=round($total_profit_eu, 2)?>
+      €&nbsp;<?=round($paper_total_profit_eu, 2)?>
       </div>
       <div class="cell" data-title="profit %">
-        <?=round($total_percent_profit, 2)?>%
+        <?=round($paper_total_percent_profit, 2)?>%
       </div>
       <div class="cell" data-title="empty">
         Total:
       </div>
       <div class="cell" data-title="profit_minus_fees">
-      €&nbsp;<?=round($total_exitprofit_eu, 2 )?>
+      €&nbsp;<?=round($paper_total_exitprofit_eu, 2 )?>
       </div>
       <div class="cell" data-title="percent_profit_minus_fees">
-        <?=round($total_percent_exitprofit, 2)?>%
+        <?=round($paper_total_percent_exitprofit, 2)?>%
       </div>
 
 </div>
@@ -564,11 +517,391 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
 
 </div>
 
-<!-- End of content of the first tab. -->
+<!-- End of content of the Paper Wallet tab. -->
+
+<!-- Content of the Bitfinex tab goes here -->
+
+<div id="Bitfinex" class="tabcontent" align="center">
+
+<!-- First table for USD prices -->
+
+<div class="wrapper">
+
+<div class="table">
+  <div class="row header blue" style="display:table-row">
+    <div class="cell">Bitfinex (in dollars)</div>
+  </div>
+</div>
+<div class="table">
+<div class="row header green">
+      <div class="cell">
+        Coin
+      </div>
+      <div class="cell">
+        Symbol
+      </div>
+      <div class="cell">
+        Rate
+      </div>
+      <div class="cell">
+        Buyin Rate
+      </div>
+      <div class="cell">
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell">
+        Profit
+      </div>
+      <div class="cell">
+        Profit&nbsp;%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        Bitcoin Cash
+      </div>
+      <div class="cell" data-title="Symbol">
+        BCH
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$bfn_bch_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$bfn_bch_buyinrate?>
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bfn_bch_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        N/A
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        Ethereum Classic
+      </div>
+      <div class="cell" data-title="Symbol">
+        ETC
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$bfn_etc_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$bfn_etc_buyinrate?>
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bfn_etc_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        N/A
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        Iota
+      </div>
+      <div class="cell" data-title="Symbol">
+        Iota
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$bfn_iota_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$bfn_iota_buyinrate?>
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bfn_iota_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        <?=round($bfn_iota_percent_profit, 2)?>%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        Monero
+      </div>
+      <div class="cell" data-title="Symbol">
+        XMR
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$bfn_xmr_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$bfn_xmr_buyinrate?>
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bfn_xmr_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        <?=round($bfn_xmr_percent_profit, 2)?>%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        Ripple
+      </div>
+      <div class="cell" data-title="Symbol">
+        XRP
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$bfn_xrp_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$bfn_xrp_buyinrate?>
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bfn_xrp_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        <?=round($bfn_xrp_percent_profit, 2)?>%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="Symbol">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="Rate">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="buyin_rate">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="empty">
+        Total:
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bfn_total_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        <?=round($bfn_total_percent_profit, 2)?>%
+      </div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- End of content of the Bitfinex tab -->
+
+<!-- Content of the Binance tab goes here -->
+
+<div id="Binance" class="tabcontent" align="center">
+
+<!-- First table for USD prices -->
+
+<div class="wrapper">
+
+<div class="table">
+  <div class="row header blue" style="display:table-row">
+    <div class="cell">Binance (in dollars)</div>
+  </div>
+</div>
+<div class="table">
+<div class="row header green">
+      <div class="cell">
+        Coin
+      </div>
+      <div class="cell">
+        Symbol
+      </div>
+      <div class="cell">
+        Rate
+      </div>
+      <div class="cell">
+        Buyin Rate
+      </div>
+      <div class="cell">
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell">
+        Profit
+      </div>
+      <div class="cell">
+        Profit&nbsp;%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        Cardano
+      </div>
+      <div class="cell" data-title="Symbol">
+        ADA
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$bin_ada_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$bin_ada_buyinrate?>
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bin_ada_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        <?=round($bin_ada_percent_profit, 2)?>%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        Neo
+      </div>
+      <div class="cell" data-title="Symbol">
+        Neo
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$bin_neo_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$bin_neo_buyinrate?>
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bin_neo_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        <?=round($bin_neo_percent_profit, 2)?>%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        VeChain
+      </div>
+      <div class="cell" data-title="Symbol">
+        Ven
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$bin_ven_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$bin_ven_buyinrate?>
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bin_ven_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        <?=round($bin_ven_percent_profit, 2)?>%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        Litecoin
+      </div>
+      <div class="cell" data-title="Symbol">
+        LTC
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$bin_ltc_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$bin_ltc_buyinrate?>
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bin_ltc_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+      N/A
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        Bitcoin
+      </div>
+      <div class="cell" data-title="Symbol">
+        BTC
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$bin_btc_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$bin_btc_buyinrate?>
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bin_btc_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+      N/A
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="Symbol">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="Rate">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="buyin_rate">
+        &nbsp;
+      </div>
+      <div class="cell" data-title="empty">
+        Total:
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($bin_total_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        <?=round($bin_total_percent_profit, 2)?>%
+      </div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- End of content of the Binance tab -->
+
+<!-- Content of the Watchlist tab goes here -->
 
 <div id="Watchlist" class="tabcontent" align="center">
-
-<!-- Content of the second tab goes here. Needs cleaning into separate files. -->
 
 <!-- First table for USD prices of coinmarketcap -->
 
@@ -588,7 +921,7 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
         Symbol
       </div>
       <div class="cell">
-        Value
+        Rate
       </div>
       <div class="cell">
         Buyin Target
@@ -620,7 +953,7 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         <?=$cmc_burst_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       $&nbsp;<?=$cmc_burst_rate?>
       </div>
       <div class="cell" data-title="buyin_rate">
@@ -649,45 +982,12 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
 
 <div class="row">
       <div class="cell" data-title="Coin">
-        Cardano (ADA)
-      </div>
-      <div class="cell" data-title="Symbol">
-        <?=$cmc_cardano_symbol?>
-      </div>
-      <div class="cell" data-title="Value">
-      $&nbsp;<?=$cmc_cardano_rate?>
-      </div>
-      <div class="cell" data-title="buyin_target">
-      $&nbsp;<?=$cardano_buyintarget?>
-      </div>
-      <div class="cell" data-title="percent_change_1h">
-        <?=$cmc_cardano_percent_change_1h?>%
-      </div>
-      <div class="cell" data-title="percent_change_24h">
-        <?=$cmc_cardano_percent_change_24h?>%
-      </div>
-      <div class="cell" data-title="percent_change_7d">
-        <?=$cmc_cardano_percent_change_7d?>%
-      </div>
-      <div class="cell" data-title="empty">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </div>
-      <div class="cell" data-title="profit">
-      $&nbsp;<?=round($cardano_exitprofit, 2)?>
-      </div>
-      <div class="cell" data-title="profit %">
-        <?=round($cardano_percent_exitprofit, 2)?>%
-      </div>
-</div>
-
-<div class="row">
-      <div class="cell" data-title="Coin">
         Eos
       </div>
       <div class="cell" data-title="Symbol">
         <?=$cmc_eos_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       $&nbsp;<?=$cmc_eos_rate?>
       </div>
       <div class="cell" data-title="buyin_target">
@@ -715,111 +1015,12 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
 
 <div class="row">
       <div class="cell" data-title="Coin">
-        Iota
-      </div>
-      <div class="cell" data-title="Symbol">
-        <?=$cmc_iota_symbol?>
-      </div>
-      <div class="cell" data-title="Value">
-      $&nbsp;<?=$cmc_iota_rate?>
-      </div>
-      <div class="cell" data-title="buyin_target">
-      $&nbsp;<?=$iota_buyintarget?>
-      </div>
-      <div class="cell" data-title="percent_change_1h">
-        <?=$cmc_iota_percent_change_1h?>%
-      </div>
-      <div class="cell" data-title="percent_change_24h">
-        <?=$cmc_iota_percent_change_24h?>%
-      </div>
-      <div class="cell" data-title="percent_change_7d">
-        <?=$cmc_iota_percent_change_7d?>%
-      </div>
-      <div class="cell" data-title="empty">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </div>
-      <div class="cell" data-title="profit">
-      $&nbsp;<?=round($iota_exitprofit, 2)?>
-      </div>
-      <div class="cell" data-title="profit %">
-        <?=round($iota_percent_exitprofit, 2)?>%
-      </div>
-</div>
-
-<div class="row">
-      <div class="cell" data-title="Coin">
-        Neo
-      </div>
-      <div class="cell" data-title="Symbol">
-        <?=$cmc_neo_symbol?>
-      </div>
-      <div class="cell" data-title="Value">
-      $&nbsp;<?=$cmc_neo_rate?>
-      </div>
-      <div class="cell" data-title="buyin_target">
-      $&nbsp;<?=$neo_buyintarget?>
-      </div>
-      <div class="cell" data-title="percent_change_1h">
-        <?=$cmc_neo_percent_change_1h?>%
-      </div>
-      <div class="cell" data-title="percent_change_24h">
-        <?=$cmc_neo_percent_change_24h?>%
-      </div>
-      <div class="cell" data-title="percent_change_7d">
-        <?=$cmc_neo_percent_change_7d?>%
-      </div>
-      <div class="cell" data-title="empty">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </div>
-      <div class="cell" data-title="profit">
-      $&nbsp;<?=round($neo_exitprofit, 2)?>
-      </div>
-      <div class="cell" data-title="profit %">
-        <?=round($neo_percent_exitprofit, 2)?>%
-      </div>
-</div>
-
-<div class="row">
-      <div class="cell" data-title="Coin">
-        Ripple (XRP)
-      </div>
-      <div class="cell" data-title="Symbol">
-        <?=$cmc_ripple_symbol?>
-      </div>
-      <div class="cell" data-title="Value">
-      $&nbsp;<?=$cmc_ripple_rate?>
-      </div>
-      <div class="cell" data-title="buyin_target">
-      $&nbsp;<?=$ripple_buyintarget?>
-      </div>
-      <div class="cell" data-title="percent_change_1h">
-        <?=$cmc_ripple_percent_change_1h?>%
-      </div>
-      <div class="cell" data-title="percent_change_24h">
-        <?=$cmc_ripple_percent_change_24h?>%
-      </div>
-      <div class="cell" data-title="percent_change_7d">
-        <?=$cmc_ripple_percent_change_7d?>%
-      </div>
-      <div class="cell" data-title="empty">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </div>
-      <div class="cell" data-title="profit">
-      $&nbsp;<?=round($ripple_exitprofit, 2)?>
-      </div>
-      <div class="cell" data-title="profit %">
-        <?=round($ripple_percent_exitprofit, 2)?>%
-      </div>
-</div>
-
-<div class="row">
-      <div class="cell" data-title="Coin">
         Verge (XVG)
       </div>
       <div class="cell" data-title="Symbol">
         <?=$cmc_verge_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       $&nbsp;<?=$cmc_verge_rate?>
       </div>
       <div class="cell" data-title="buyin_target">
@@ -852,7 +1053,7 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         <?=$cmc_waves_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       $&nbsp;<?=$cmc_waves_rate?>
       </div>
       <div class="cell" data-title="buyin_target">
@@ -885,7 +1086,7 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
       <div class="cell" data-title="Symbol">
         <?=$cmc_zcash_symbol?>
       </div>
-      <div class="cell" data-title="Value">
+      <div class="cell" data-title="Rate">
       $&nbsp;<?=$cmc_zcash_rate?>
       </div>
       <div class="cell" data-title="buyin_target">
@@ -916,8 +1117,6 @@ $total_exitprofit_eu = $total_exitprofit / $exchange_EUR_USD;
 </div>
 
 </div>
-
-<!-- End of content of the second tab -->
 
 <!-- Log out option below here -->
 
