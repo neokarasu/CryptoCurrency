@@ -146,9 +146,9 @@ $cmc_btc_rate_eu = $cmc_btc_rate / $exchange_EUR_USD;
 $cmc_eth_rate_eu = $cmc_eth_rate / $exchange_EUR_USD;
 $cmc_ltc_rate_eu = $cmc_ltc_rate / $exchange_EUR_USD;
 
-$paper_btc_buyinrate_eu = $paper_btc_buyinrate / $paper_exchange_EUR_USD;
-$paper_eth_buyinrate_eu = $paper_eth_buyinrate / $paper_exchange_EUR_USD;
-$paper_ltc_buyinrate_eu = $paper_ltc_buyinrate / $paper_exchange_EUR_USD;
+$paper_btc_buyinrate_eu = $paper_btc_buyinrate / $exchange_EUR_USD;
+$paper_eth_buyinrate_eu = $paper_eth_buyinrate / $exchange_EUR_USD;
+$paper_ltc_buyinrate_eu = $paper_ltc_buyinrate / $exchange_EUR_USD;
 
 $paper_btc_profit_eu = $paper_btc_profit / $exchange_EUR_USD;
 $paper_eth_profit_eu = $paper_eth_profit / $exchange_EUR_USD;
