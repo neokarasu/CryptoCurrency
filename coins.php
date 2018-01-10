@@ -35,6 +35,15 @@ require 'binance.php';
 // All the watchlist information is in watchlist.php 
 
 require 'watchlist.php';
+
+// Create variables for the summary tab
+
+$summary_totalbuyin = $paper_btc_totalbuyin + $paper_eth_totalbuyin + $paper_ltc_totalbuyin + $bin_ada_totalbuyin + $bin_neo_totalbuyin + $bin_ven_totalbuyin + $bin_btc_totalbuyin + $bin_ltc_totalbuyin + $bfn_bch_totalbuyin + $bfn_etc_totalbuyin + $bfn_iota_totalbuyin + $bfn_xmr_totalbuyin + $bfn_xrp_totalbuyin;
+
+$summary_total_profit = $paper_total_profit + $bfn_total_profit + $bin_total_profit;
+
+$summary_percent_profit = ($summary_total_profit / $summary_totalbuyin) * 100;
+
 ?>
 
 <html>
@@ -126,20 +135,11 @@ require 'watchlist.php';
 </div>
 
 <div class="row">
-      <div class="cell" data-title="Coin">
-        &nbsp;
-      </div>
-      <div class="cell" data-title="Symbol">
-        &nbsp;
-      </div>
-      <div class="cell" data-title="Rate">
-        &nbsp;
-      </div>
-      <div class="cell" data-title="buyin_rate">
-        &nbsp;
-      </div>
       <div class="cell" data-title="empty">
         Total:
+      </div>
+      <div class="cell" data-title="empty">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit">
       $&nbsp;<?=round($summary_total_profit, 2)?>

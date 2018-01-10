@@ -83,4 +83,5 @@ $bfn_total_profit = $bfn_bch_profit + $bfn_etc_profit + $bfn_iota_profit + $bfn_
 $bfn_total_percent_profit = ($bfn_total_profit / ($bfn_bch_totalbuyin + $bfn_etc_totalbuyin + $bfn_iota_totalbuyin + $bfn_xmr_totalbuyin + $bfn_xrp_totalbuyin)) * 100;
 $bfn_total_exitprofit = $bfn_bch_exitprofit + $bfn_etc_exitprofit + $bfn_iota_exitprofit + $bfn_xmr_exitprofit + $bfn_xrp_exitprofit;
 $bfn_total_percent_exitprofit = ($bfn_total_exitprofit / ($bfn_bch_totalbuyin + $bfn_etc_totalbuyin + $bfn_iota_totalbuyin + $bfn_xmr_totalbuyin + $bfn_xrp_totalbuyin)) * 100;
+
 ?>
