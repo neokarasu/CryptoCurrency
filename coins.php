@@ -343,6 +343,48 @@ $summary_percent_profit = ($summary_total_profit / $summary_totalbuyin) * 100;
 
 <div class="row">
       <div class="cell" data-title="Coin">
+        WePower
+      </div>
+      <div class="cell" data-title="Symbol">
+        <?=$cmc_wpr_symbol?>
+      </div>
+      <div class="cell" data-title="Rate">
+      $&nbsp;<?=$cmc_wpr_rate?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      $&nbsp;<?=$paper_wpr_buyinrate?>
+      </div>
+      <div class="cell" data-title="percent_change_1h">
+        <?=$cmc_wpr_percent_change_1h?>%
+      </div>
+      <div class="cell" data-title="percent_change_24h">
+        <?=$cmc_wpr_percent_change_24h?>%
+      </div>
+      <div class="cell" data-title="percent_change_7d">
+        <?=$cmc_wpr_percent_change_7d?>%
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      $&nbsp;<?=round($paper_wpr_profit, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        <?=round($paper_wpr_percent_profit, 2)?>%
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit_minus_fees">
+      $&nbsp;<?=round($paper_wpr_exitprofit, 2 )?>
+      </div>
+      <div class="cell" data-title="percent_profit_minus_fees">
+        <?=round($paper_wpr_percent_exitprofit, 2)?>%
+      </div>
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
         &nbsp;
       </div>
       <div class="cell" data-title="Symbol">
@@ -565,6 +607,49 @@ $summary_percent_profit = ($summary_total_profit / $summary_totalbuyin) * 100;
       </div>
       <div class="cell" data-title="percent_profit_minus_fees">
         <?=round($paper_ltc_percent_exitprofit, 2)?>%
+      </div>
+
+</div>
+
+<div class="row">
+      <div class="cell" data-title="Coin">
+        WePower
+      </div>
+      <div class="cell" data-title="Symbol">
+        <?=$cmc_wpr_symbol?>
+      </div>
+      <div class="cell" data-title="Rate">
+      €&nbsp;<?=round($cmc_wpr_rate_eu, 3)?>
+      </div>
+      <div class="cell" data-title="buyin_rate">
+      €&nbsp;<?=round($paper_wpr_buyinrate_eu, 2)?>
+      </div>
+      <div class="cell" data-title="percent_change_1h">
+        <?=$cmc_wpr_percent_change_1h?>%
+      </div>
+      <div class="cell" data-title="percent_change_24h">
+        <?=$cmc_wpr_percent_change_24h?>%
+      </div>
+      <div class="cell" data-title="percent_change_7d">
+        <?=$cmc_wpr_percent_change_7d?>%
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit">
+      €&nbsp;<?=round($paper_wpr_profit_eu, 2)?>
+      </div>
+      <div class="cell" data-title="profit %">
+        <?=round($paper_wpr_percent_profit, 2)?>%
+      </div>
+      <div class="cell" data-title="empty">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="cell" data-title="profit_minus_fees">
+      €&nbsp;<?=round($paper_wpr_exitprofit_eu, 2 )?>
+      </div>
+      <div class="cell" data-title="percent_profit_minus_fees">
+        <?=round($paper_wpr_percent_exitprofit, 2)?>%
       </div>
 
 </div>

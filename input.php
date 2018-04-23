@@ -9,6 +9,7 @@
 $btc_publickey = "";
 $eth_publickey = "";
 $ltc_publickey = "";
+$wpr_publickey = "";
 
 // The amounts of your wallets on Bitfinex. 1 per currency.
 
@@ -31,6 +32,7 @@ $bin_btc_amount = "";
 $paper_btc_buyinrate = "";
 $paper_eth_buyinrate = "";
 $paper_ltc_buyinrate = "";
+$paper_wpr_buyinrate = "";
 
 $bfn_bch_buyinrate = "";
 $bfn_etc_buyinrate = "";
@@ -49,6 +51,7 @@ $bin_btc_buyinrate = "";
 $paper_btc_totalbuyin = "";
 $paper_eth_totalbuyin = "";
 $paper_ltc_totalbuyin = "";
+$paper_wpr_totalbuyin = "";
 
 $bfn_bch_totalbuyin = "";
 $bfn_etc_totalbuyin = "";
@@ -67,6 +70,7 @@ $bin_btc_totalbuyin = "";
 $btc_transferfee = "0.00119780";
 $eth_transferfee = "0.000987";
 $ltc_transferfee  = "0.01";
+$wpr_transferfee  = "26.5";
 
 $bch_transferfee = "0.00000226";
 $etc_transferfee = "0.00088";

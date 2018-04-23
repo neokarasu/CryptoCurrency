@@ -10,10 +10,11 @@ Features:
 - A summary tab listing profits per paper wallet/exchange only
 - Easy to add interesting coins if necessary
 
-Coins added for paper wallet, using public keys:
+Coins for paper wallet, using public keys:
 - Bitcoin
 - Ethereum
 - Litecoin
+- WePower (technically a token but yeah)
 
 Coins for exchanges, manual entry:
 - Bitcoin
@@ -27,7 +28,7 @@ Coins for exchanges, manual entry:
 - Ripple
 - VeChain
 
-Coins added for watchlist:
+Coins for watchlist:
 - Burst
 - Eos
 - Verge
@@ -37,7 +38,7 @@ Coins added for watchlist:
 How to use:
 
 Input.php can be used to add:
-- Public key of owned coins, 1 per coin only. Limited to BTC, ETH and LTC
+- Public key of owned coins/tokens, 1 per coin only. Limited to BTC, ETH, LTC and WPR
 - Buyin rate: value of 1 of each coin at moment of buying, in dollars
 - Buyin costs: Amount of money spent on purchase per coin, in dollars
 - Transferfee: The usual transfer fee in the respective coin, not dollars
@@ -61,4 +62,3 @@ Plan to change:
 - Fix some of the logic & implement improved exit-cashout logic instead of estimates
 - Reduce necessary manual input for balances on exchanges
 - Add ATH (all time high and 2/3 of ATH as info if any site supplies this through an API)
-- Add more coins
