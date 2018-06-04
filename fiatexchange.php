@@ -5,6 +5,6 @@
 $url = "https://openexchangerates.org/api/latest.json?app_id=$openexchangerates_apikey";
 $json = file_get_contents($url);
 $exchangedata_USD_EUR = json_decode($json, TRUE);
-$exchange_USD_EUR = $exchangedata_EUR_USD["rates"]["EUR"];
+$exchange_USD_EUR = $exchangedata_USD_EUR["rates"]["EUR"];
 $exchange_EUR_USD = 1 / $exchange_USD_EUR;
 ?>
