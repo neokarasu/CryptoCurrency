@@ -51,7 +51,7 @@ Coins.php shows basic information on:
 - Profit deducting regular fees (absolute and percentage)
 
 Dependencies:
-- Coins.php uses exchange rates for EUR/USD from fixer.io which are updated at 4pm CET every working day
+- Coins.php uses exchange rates for EUR/USD from OpenExchangeRates.org. You need to sign up with them at0 https://openexchangerates.org for an API-key
 - Coins.php uses cryptocurrency exchange rates and percentage changes from Coinmarketcap that are updated every 5 minutes
 - Balance.php uses Blockchain.info, Etherscan.io and Chainz.cryptoid.info to fetch balance data for public adresses
 - Bitfinex.php uses Bitfinex API to fetch data for rates of coins at Bitfinex
@@ -59,6 +59,4 @@ Dependencies:
 
 Plan to change:
 - Add actual fees (if any site supplies this through an API)
-- Fix some of the logic & implement improved exit-cashout logic instead of estimates
-- Reduce necessary manual input for balances on exchanges
 - Add ATH (all time high and 2/3 of ATH as info if any site supplies this through an API)

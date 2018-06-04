@@ -110,4 +110,8 @@ $verge_transferfee  = "";
 $waves_transferfee  = "";
 $zcash_transferfee  = "";
 
+// Your OpenExchangeRates.org API key
+
+$openexchangerates_apikey = "";
+
 ?>
