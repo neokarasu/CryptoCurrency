@@ -23,7 +23,7 @@ $bfn_xrp_amount = "";
 
 $bin_ada_amount = "";
 $bin_neo_amount = "";
-$bin_ven_amount = "";
+$bin_vet_amount = "";
 $bin_ltc_amount = "";
 $bin_btc_amount = "";
 
@@ -42,7 +42,7 @@ $bfn_xrp_buyinrate = "";
 
 $bin_ada_buyinrate = "";
 $bin_neo_buyinrate = "";
-$bin_ven_buyinrate = "";
+$bin_vet_buyinrate = "";
 $bin_ltc_buyinrate = "";
 $bin_btc_buyinrate = "";
 
@@ -61,7 +61,7 @@ $bfn_xrp_totalbuyin = "";
 
 $bin_ada_totalbuyin = "";
 $bin_neo_totalbuyin = "";
-$bin_ven_totalbuyin = "";
+$bin_vet_totalbuyin = "";
 $bin_ltc_totalbuyin = "";
 $bin_btc_totalbuyin = "";
 
@@ -80,7 +80,7 @@ $xrp_transferfee = "0.0125";
 
 $ada_transferfee = "0.2";
 $neo_transferfee = "0";
-$ven_transferfee = "0.6";
+$vet_transferfee = "7";
 
 $bfn_bch_withdrawalfee = "0.0001";
 $bfn_etc_withdrawalfee = "0.01";
@@ -90,7 +90,7 @@ $bfn_xrp_withdrawalfee = "0.02";
 
 $bin_ada_withdrawalfee = "1";
 $bin_neo_withdrawalfee = "0";
-$bin_ven_withdrawalfee = "5";
+$bin_vet_withdrawalfee = "100";
 $bin_ltc_withdrawalfee = "0.01";
 $bin_btc_withdrawalfee = "0.001";
 

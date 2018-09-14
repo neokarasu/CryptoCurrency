@@ -38,7 +38,7 @@ require 'watchlist.php';
 
 // Create variables for the summary tab
 
-$summary_totalbuyin = $paper_btc_totalbuyin + $paper_eth_totalbuyin + $paper_ltc_totalbuyin + $bin_ada_totalbuyin + $bin_neo_totalbuyin + $bin_ven_totalbuyin + $bin_btc_totalbuyin + $bin_ltc_totalbuyin + $bfn_bch_totalbuyin + $bfn_etc_totalbuyin + $bfn_iota_totalbuyin + $bfn_xmr_totalbuyin + $bfn_xrp_totalbuyin;
+$summary_totalbuyin = $paper_btc_totalbuyin + $paper_eth_totalbuyin + $paper_ltc_totalbuyin + $bin_ada_totalbuyin + $bin_neo_totalbuyin + $bin_vet_totalbuyin + $bin_btc_totalbuyin + $bin_ltc_totalbuyin + $bfn_bch_totalbuyin + $bfn_etc_totalbuyin + $bfn_iota_totalbuyin + $bfn_xmr_totalbuyin + $bfn_xrp_totalbuyin;
 
 $summary_total_profit = $paper_total_profit + $bfn_total_profit + $bin_total_profit;
 
@@ -984,22 +984,22 @@ $summary_percent_profit = ($summary_total_profit / $summary_totalbuyin) * 100;
         VeChain
       </div>
       <div class="cell" data-title="Symbol">
-        Ven
+        Vet
       </div>
       <div class="cell" data-title="Rate">
-      $&nbsp;<?=$bin_ven_rate?>
+      $&nbsp;<?=$bin_vet_rate?>
       </div>
       <div class="cell" data-title="buyin_rate">
-      $&nbsp;<?=$bin_ven_buyinrate?>
+      $&nbsp;<?=$bin_vet_buyinrate?>
       </div>
       <div class="cell" data-title="empty">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div class="cell" data-title="profit">
-      $&nbsp;<?=round($bin_ven_profit, 2)?>
+      $&nbsp;<?=round($bin_vet_profit, 2)?>
       </div>
       <div class="cell" data-title="profit %">
-        <?=round($bin_ven_percent_profit, 2)?>%
+        <?=round($bin_vet_percent_profit, 2)?>%
       </div>
 </div>
 
