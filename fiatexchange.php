@@ -1,10 +1,14 @@
-<?php 
+<?php
 
-// This is a single api call per page load that brings up latest exchange data between EUR and USD, using EUR as base
+// ====================
+// Get the exchange rates between Dollars and Euros with 1 API call per page load
+// ====================
 
-$url = "https://openexchangerates.org/api/latest.json?app_id=$openexchangerates_apikey";
-$json = file_get_contents($url);
-$exchangedata_USD_EUR = json_decode($json, TRUE);
-$exchange_USD_EUR = $exchangedata_USD_EUR["rates"]["EUR"];
-$exchange_EUR_USD = 1 / $exchange_USD_EUR;
+// Add the necessary URL, perform the requestand make a usable variable out of the response with USD as base
+
+$fiatExchangeUrl = 'https://openexchangerates.org/api/latest.json?app_id=' . $openExchangeRatesApiKey . '&symbols=EUR';
+$fiatExchangeResponse = curl_get_contents($fiatExchangeUrl);
+$fiatExchangeArray = json_decode($fiatExchangeResponse, TRUE);
+$fiatExchangeDataUSD = $fiatExchangeArray['rates']['EUR'];
+
 ?>

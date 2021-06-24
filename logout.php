@@ -1,6 +1,8 @@
-<?php 
+<?php
 
-session_start(); /* Starts the session */
+// Start the session
+
+session_start();
 
 // Destroy the session to log out the user
 
@@ -10,4 +12,5 @@ session_destroy();
 
 header("location:index.php");
 exit;
+
 ?>

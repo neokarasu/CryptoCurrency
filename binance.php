@@ -1,97 +1,93 @@
 <?php
 
-// binance will be refered to as bin for variables
+// ====================
+// Set up timestamp and headers for further use with the Binance API
+// ====================
 
-// This is a single api call per page load that brings up the data for all Binance pair rates
+// Get the time in milliseconds as required for the timestamp
 
+list($msec, $sec) = explode(' ', microtime());
+$timeMilliSeconds = $sec.substr($msec, 2, 3);
 
-$url = "https://www.binance.com/api/v1/ticker/allPrices";
-$json = file_get_contents($url);
-$bin_data = json_decode($json, TRUE);
+// Set up the headers to use for Binance
 
-// Make an easy usable array containing only the coin names and id (index key) for further use
-
-$bin_list_coin_symbols = array_column($bin_data, 'symbol');
-
-// Get proper id (index key) for interesting coins from the array to use when assigning variables to info from the array
-
-// Warning: using the Ethereum tradepairs for coins that do not have an USDT tradepair. If possible USDT is used.
-
-$bin_cardano_id = array_search('ADAUSDT', $bin_list_coin_symbols);
-$bin_neo_id = array_search('NEOUSDT', $bin_list_coin_symbols);
-$bin_vechain_id = array_search('VETUSDT', $bin_list_coin_symbols);
-$bin_bitcoin_id = array_search('BTCUSDT', $bin_list_coin_symbols);
-$bin_litecoin_id = array_search('LTCUSDT', $bin_list_coin_symbols);
-$bin_ethereum_id = array_search('ETHUSDT', $bin_list_coin_symbols);
+$binanceHeaders = [
+    'Accepts: application/json',
+    "X-MBX-APIKEY: $binanceApiKey"
+];
 
 
-// Create variables for the data to be shown in the tables for owned coins
 
-$bin_ada_rate = $bin_data[$bin_cardano_id]["price"];
-$bin_ada_symbol = $bin_data[$bin_cardano_id]["symbol"];
+// ====================
+// Look up the Binance balances for all cryptocurrencies in your account with 1 API call per page load
+// ====================
 
-$bin_neo_rate = $bin_data[$bin_neo_id]["price"];
-$bin_neo_symbol = $bin_data[$bin_neo_id]["symbol"];
+// Start with adding the necessary url and parameters
 
-$bin_vet_rate = $bin_data[$bin_vechain_id]["price"];
-$bin_vet_symbol = $bin_data[$bin_vechain_id]["symbol"];
+$binanceBalanceUrl = 'https://api.binance.com/api/v3/account';
+$binanceBalanceParameters = [
+    'timestamp' => "$timeMilliSeconds",
+];
 
-$bin_btc_rate = $bin_data[$bin_bitcoin_id]["price"];
-$bin_btc_symbol = $bin_data[$bin_bitcoin_id]["symbol"];
+// Query string encode the parameters, make the signature and then build the request URL
 
-$bin_ltc_rate = $bin_data[$bin_litecoin_id]["price"];
-$bin_ltc_symbol = $bin_data[$bin_litecoin_id]["symbol"];
+$binanceBalanceQs = http_build_query($binanceBalanceParameters);
+$binanceBalanceSignature = hash_hmac('sha256', "$binanceBalanceQs", "$binanceSecretKey");
+$binanceBalanceRequest = "$binanceBalanceUrl?$binanceBalanceQs&signature=$binanceBalanceSignature";
 
-$bin_eth_rate = $bin_data[$bin_ethereum_id]["price"];
-$bin_eth_symbol = $bin_data[$bin_ethereum_id]["symbol"];
+// Perform the request and make a usable array out of the response
 
-$bin_ada_exitamount = $bin_ada_amount - ($bin_ada_withdrawalfee + $ada_transferfee);
-$bin_neo_exitamount = $bin_neo_amount - ($bin_neo_withdrawalfee + $neo_transferfee);
-$bin_vet_exitamount = $bin_vet_amount - ($bin_vet_withdrawalfee + $vet_transferfee);
-$bin_btc_exitamount = $bin_btc_amount - ($bin_btc_withdrawalfee + $btc_transferfee);
-$bin_ltc_exitamount = $bin_ltc_amount - ($bin_ltc_withdrawalfee + $ltc_transferfee);
+$binanceBalanceResponse = curl_get_contents($binanceBalanceRequest,$binanceHeaders);
+$binanceBalanceArray = json_decode($binanceBalanceResponse,true);
+
+// Extract the data we actually want, rearrange it into a 2-dimensional array with coin names as keys and remove any with amount 0
+
+$binanceBalanceRaw = array_column($binanceBalanceArray['balances'],'free','asset');
+$binanceBalanceResult = array_diff($binanceBalanceRaw,array('0.00000000', '0.00'));
+
+// Sort the array by coin names
+
+ksort($binanceBalanceResult);
 
 
-// Continue regular calculations
 
-$bin_ada_exitcost = (0.0025 * ($bin_ada_exitamount * $bin_ada_rate)) + (0.9 * $exchange_EUR_USD );
-$bin_neo_exitcost = (0.0025 * ($bin_neo_exitamount * $bin_neo_rate)) + (0.9 * $exchange_EUR_USD );
-$bin_vet_exitcost = (0.0025 * ($bin_vet_exitamount * $bin_vet_rate)) + (0.9 * $exchange_EUR_USD );
-$bin_btc_exitcost = (0.0025 * ($bin_btc_exitamount * $bin_btc_rate)) + (0.9 * $exchange_EUR_USD );
-$bin_ltc_exitcost = (0.0025 * ($bin_ltc_exitamount * $bin_ltc_rate)) + (0.9 * $exchange_EUR_USD );
+// ====================
+// Look up the Binance withdrawal fees for all cryptocurrencies with 1 API call per page load
+// ====================
 
-$bin_ada_totalexit = ($bin_ada_exitamount * $bin_ada_rate) - $bin_ada_exitcost;
-$bin_neo_totalexit = ($bin_neo_exitamount * $bin_neo_rate) - $bin_neo_exitcost;
-$bin_vet_totalexit = ($bin_vet_exitamount * $bin_vet_rate) - $bin_vet_exitcost;
-$bin_btc_totalexit = ($bin_btc_exitamount * $bin_btc_rate) - $bin_btc_exitcost;
-$bin_ltc_totalexit = ($bin_ltc_exitamount * $bin_ltc_rate) - $bin_ltc_exitcost;
+// Start with adding the necessary url and parameters
 
-$bin_ada_profit = ($bin_ada_rate - $bin_ada_buyinrate ) * $bin_ada_amount;
-$bin_neo_profit = ($bin_neo_rate - $bin_neo_buyinrate ) * $bin_neo_amount;
-$bin_vet_profit = ($bin_vet_rate - $bin_vet_buyinrate ) * $bin_vet_amount;
-$bin_btc_profit = ($bin_btc_rate - $bin_btc_buyinrate ) * $bin_btc_amount;
-$bin_ltc_profit = ($bin_ltc_rate - $bin_ltc_buyinrate ) * $bin_ltc_amount;
+$binanceWithdrawalFeeUrl = 'https://api.binance.com/sapi/v1/asset/assetDetail';
+$binanceWithdrawalFeeParameters = [
+    'timestamp' => "$timeMilliSeconds",
+];
 
-$bin_ada_percent_profit = ($bin_ada_profit / $bin_ada_totalbuyin) * 100;
-$bin_neo_percent_profit = ($bin_neo_profit / $bin_neo_totalbuyin) * 100;
-$bin_vet_percent_profit = ($bin_vet_profit / $bin_vet_totalbuyin) * 100;
-$bin_btc_percent_profit = ($bin_btc_profit / $bin_btc_totalbuyin) * 100;
-$bin_ltc_percent_profit = ($bin_ltc_profit / $bin_ltc_totalbuyin) * 100;
+// Query string encode the parameters, make the signature and then build the request URL
 
-$bin_ada_exitprofit = $bin_ada_totalexit - $bin_ada_totalbuyin;
-$bin_neo_exitprofit = $bin_neo_totalexit - $bin_neo_totalbuyin;
-$bin_vet_exitprofit = $bin_vet_totalexit - $bin_vet_totalbuyin;
-$bin_btc_exitprofit = $bin_btc_totalexit - $bin_btc_totalbuyin;
-$bin_ltc_exitprofit = $bin_ltc_totalexit - $bin_ltc_totalbuyin;
+$binanceWithdrawalFeeQs = http_build_query($binanceWithdrawalFeeParameters);
+$binanceWithdrawalFeeSignature = hash_hmac('sha256', "$binanceWithdrawalFeeQs", "$binanceSecretKey");
+$binanceWithdrawalFeeRequest = "$binanceWithdrawalFeeUrl?$binanceWithdrawalFeeQs&signature=$binanceWithdrawalFeeSignature";
 
-$bin_ada_percent_exitprofit = ($bin_ada_exitprofit / $bin_ada_totalbuyin) * 100;
-$bin_neo_percent_exitprofit = ($bin_neo_exitprofit / $bin_neo_totalbuyin) * 100;
-$bin_vet_percent_exitprofit = ($bin_vet_exitprofit / $bin_vet_totalbuyin) * 100;
-$bin_btc_percent_exitprofit = ($bin_btc_exitprofit / $bin_btc_totalbuyin) * 100;
-$bin_ltc_percent_exitprofit = ($bin_ltc_exitprofit / $bin_ltc_totalbuyin) * 100;
+// Perform the request and make a usable array out of the response
 
-$bin_total_profit = $bin_ada_profit + $bin_neo_profit + $bin_vet_profit + $bin_btc_profit + $bin_ltc_profit;
-$bin_total_percent_profit = ($bin_total_profit / ($bin_ada_totalbuyin + $bin_neo_totalbuyin + $bin_vet_totalbuyin + $bin_btc_totalbuyin + $bin_ltc_totalbuyin)) * 100;
-$bin_total_exitprofit = $bin_ada_exitprofit + $bin_neo_exitprofit + $bin_vet_exitprofit + $bin_btc_exitprofit + $bin_ltc_exitprofit;
-$bin_total_percent_exitprofit = ($bin_total_exitprofit / ($bin_ada_totalbuyin + $bin_neo_totalbuyin + $bin_vet_totalbuyin + $bin_btc_totalbuyin + $bin_ltc_totalbuyin)) * 100;
+$binanceWithdrawalFeeResponse = curl_get_contents($binanceWithdrawalFeeRequest,$binanceHeaders);
+$binanceWithdrawalFeeArray = json_decode($binanceWithdrawalFeeResponse,true);
+
+// Extract the data we actually want and rearrange it into a 2 dimensional array with coin names as keys
+
+foreach($binanceWithdrawalFeeArray  as $key => $value) {
+    $binanceWithdrawalFeeResult["$key"] = array_values($value)['0'];
+}
+
+// Sort the array by coin names (keys)
+
+ksort($binanceWithdrawalFeeResult);
+
+
+
+// ====================
+// Pointless to query for the trade fees at Binance since they're not coin-specific.
+// Take a default of 0.001 in all cases which is set in input.php
+// ====================
+
 ?>
