@@ -20,7 +20,7 @@ function openTabContent(evt, tabID) {
     evt.currentTarget.className += " active";
 }
 document.querySelectorAll('.tablinks').forEach(item => {
-          $(item).click(function() {
+          item.addEventListener('click', function(){
           openTabContent(event,item.dataset.tab);
         });
   });
