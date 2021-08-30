@@ -19,3 +19,9 @@ function openTabContent(evt, tabID) {
     document.getElementById(tabID).style.display = "block";
     evt.currentTarget.className += " active";
 }
+document.querySelectorAll('.tablinks').forEach(item => {
+          $(item).click(function() {
+          openTabContent(event,item.dataset.tab);
+        });
+  });
+document.getElementById("defaultOpen").click();

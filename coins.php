@@ -34,11 +34,11 @@ if(!isset($_SESSION['UserData']['Username'])) {
 <body>
 
 <div class="tabmenu">
-    <button class="tablinks" onclick="openTabContent(event, 'Summary')" id="defaultOpen">Summary</button>
-    <button class="tablinks" onclick="openTabContent(event, 'Paper Wallet')">Paper Wallet</button>
-    <button class="tablinks" onclick="openTabContent(event, 'Binance')">Binance</button>
-    <button class="tablinks" onclick="openTabContent(event, 'Bitfinex')">Bitfinex</button>
-    <button class="tablinks" onclick="openTabContent(event, 'Watchlist')">Watchlist</button>
+    <button class="tablinks" data-evt="event" data-tab="Summary" id="defaultOpen">Summary</button>
+    <button class="tablinks" data-evt="event" data-tab="Paper Wallet">Paper Wallet</button>
+    <button class="tablinks" data-evt="event" data-tab="Binance">Binance</button>
+    <button class="tablinks" data-evt="event" data-tab="Bitfinex">Bitfinex</button>
+    <button class="tablinks" data-evt="event" data-tab="Watchlist">Watchlist</button>
 </div>
 
 <div id="Summary" class="tabcontent" align="center" style="overflow-x:auto;">
@@ -120,10 +120,6 @@ if(!isset($_SESSION['UserData']['Username'])) {
     <a href="logout.php">Click here</a> to Logout
 </div>
 
-<script>
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-</script>
 
 </body>
 </html>
