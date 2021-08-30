@@ -27,7 +27,6 @@ if(!isset($_SESSION['UserData']['Username'])) {
 <meta name="viewport" content="width=device-width, initial-scale=0.8">
 <title>Cryptocurrency</title>
 <link rel="stylesheet" type="text/css" href="coinstyle.css" />
-<script src="tabs.js"></script>
 </head>
 
 
@@ -119,7 +118,6 @@ if(!isset($_SESSION['UserData']['Username'])) {
 <div class="logout table header green">
     <a href="logout.php">Click here</a> to Logout
 </div>
-
-
+<script src="tabs.js"></script>
 </body>
 </html>
