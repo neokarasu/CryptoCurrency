@@ -33,11 +33,11 @@ if(!isset($_SESSION['UserData']['Username'])) {
 <body>
 
 <div class="tabmenu">
-    <button class="tablinks" data-evt="event" data-tab="Summary" id="defaultOpen">Summary</button>
-    <button class="tablinks" data-evt="event" data-tab="Paper Wallet">Paper Wallet</button>
-    <button class="tablinks" data-evt="event" data-tab="Binance">Binance</button>
-    <button class="tablinks" data-evt="event" data-tab="Bitfinex">Bitfinex</button>
-    <button class="tablinks" data-evt="event" data-tab="Watchlist">Watchlist</button>
+    <button class="tablinks" data-tab="Summary" id="defaultOpen">Summary</button>
+    <button class="tablinks" data-tab="Paper Wallet">Paper Wallet</button>
+    <button class="tablinks" data-tab="Binance">Binance</button>
+    <button class="tablinks" data-tab="Bitfinex">Bitfinex</button>
+    <button class="tablinks" data-tab="Watchlist">Watchlist</button>
 </div>
 
 <div id="Summary" class="tabcontent" align="center" style="overflow-x:auto;">
