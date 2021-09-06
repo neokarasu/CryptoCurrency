@@ -19,9 +19,13 @@ function openTabContent(evt, tabID) {
     document.getElementById(tabID).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+// Add EventListeners so tabs can be clicked; if clicked show the content of that tab
 document.querySelectorAll('.tablinks').forEach(item => {
-          item.addEventListener('click', function(){
-          openTabContent(event,item.dataset.tab);
+    item.addEventListener('click', function(){
+        openTabContent(event,item.dataset.tab);
         });
-  });
+    });
+
+// Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
