@@ -27,18 +27,17 @@ if(!isset($_SESSION['UserData']['Username'])) {
 <meta name="viewport" content="width=device-width, initial-scale=0.8">
 <title>Cryptocurrency</title>
 <link rel="stylesheet" type="text/css" href="coinstyle.css" />
-<script src="tabs.js"></script>
 </head>
 
 
 <body>
 
 <div class="tabmenu">
-    <button class="tablinks" onclick="openTabContent(event, 'Summary')" id="defaultOpen">Summary</button>
-    <button class="tablinks" onclick="openTabContent(event, 'Paper Wallet')">Paper Wallet</button>
-    <button class="tablinks" onclick="openTabContent(event, 'Binance')">Binance</button>
-    <button class="tablinks" onclick="openTabContent(event, 'Bitfinex')">Bitfinex</button>
-    <button class="tablinks" onclick="openTabContent(event, 'Watchlist')">Watchlist</button>
+    <button class="tablinks" data-tab="Summary" id="defaultOpen">Summary</button>
+    <button class="tablinks" data-tab="Paper Wallet">Paper Wallet</button>
+    <button class="tablinks" data-tab="Binance">Binance</button>
+    <button class="tablinks" data-tab="Bitfinex">Bitfinex</button>
+    <button class="tablinks" data-tab="Watchlist">Watchlist</button>
 </div>
 
 <div id="Summary" class="tabcontent" align="center" style="overflow-x:auto;">
@@ -119,11 +118,6 @@ if(!isset($_SESSION['UserData']['Username'])) {
 <div class="logout table header green">
     <a href="logout.php">Click here</a> to Logout
 </div>
-
-<script>
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-</script>
-
+<script src="tabs.js"></script>
 </body>
 </html>
